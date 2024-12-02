@@ -1,0 +1,145 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="student_list_view">
+      <field name="name">Student list</field>
+      <field name="model">university.student</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="f_name"/>
+          <field name="l_name"/>
+          <field name="sex"/>
+          <field name="identity_card"/>
+          <field name="birthday"/>
+          <field name="registration_date"/>
+        </tree>
+      </field>
+    </record>
+
+        <!-- explicit form view definition -->
+
+    <record model="ir.ui.view" id="student_form_view">
+      <field name="name">Student form</field>
+      <field name="model">university.student</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <button name="next_level" type="object" class="oe_highlight" string="Next Level"/>
+            <field name="state" widget="statusbar" nolabel="1"/>
+            <button name="create_wizard" type="object" class="oe_highlight" string="Open Wizard"/>
+          </header>
+          <sheet>
+          <group>
+            <group>
+              <field name="f_name"/>
+              <field name="l_name"/>
+              <field name="sex"/>
+              <field name="identity_card"/>
+              <field name="birthday"/>
+            </group>
+            <group>
+              <field name="registration_date" attrs="{'readonly':[('state','!=','l1')]}"/>
+              <field name="address" attrs="{'invisible':[('identity_card','=','False')]}"/>
+              <field name="email"/>
+              <field name="phone"/>
+              <field name="department_id"/>
+              <field name="classroom_id" attrs="{'required':[('department_id','!=','False')]}"/>
+            </group>
+          </group>
+          <notebook>
+            <page string="List of subjects">
+              <field name="subject_ids"/>
+            </page>
+          </notebook>
+          </sheet>
+          <header>
+              <button name="%(student_action_window)d" type="action" string="View Students" groups="university.group_student_restriction"/>
+          </header>
+        </form>
+      </field>
+    </record>
+
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="student_action_window">
+      <field name="name">student window</field>
+      <field name="res_model">university.student</field>
+      <field name="view_mode">tree,form,kanban,calendar,pivot</field>
+    </record>
+
+    <record model="ir.ui.view" id="student_kanban_view">
+      <field name="name">Student Kanban View</field>
+      <field name="model">university.student</field>
+      <field name="arch" type="xml">
+          <kanban class="student_kanban">
+              <templates>
+                <t t-name="kanban-box">
+                  <div class="oe_kanban_global_click">
+                      <div class="oe_kanban_details">
+                          <strong>
+                              <field name="f_name"/>
+                          </strong>
+                          <div>
+                              <field name="registration_date"/>
+                          </div>
+                          <div>
+                              <field name="birthday"/>
+                          </div>
+                      </div>
+                  </div>
+                </t>
+              </templates>
+            <header>
+                <button name="%(student_action_window)d" type="action" string="View Students" groups="university.group_instructor_restriction"/>
+            </header>
+          </kanban>
+      </field>
+    </record>
+
+
+    <!-- Top menu item -->
+
+    <record model="ir.ui.view" id="student_calendar_view">
+      <field name="name">Student Calendar View</field>
+      <field name="model">university.student</field>
+      <field name="arch" type="xml">
+        <calendar string="Registration" date_start="birthday" date_stop="registration_date">
+          <field name="f_name"/>
+          <field name="birthday"/>
+          <field name="registration_date"/>
+        </calendar>
+      </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="student_pivot_view">
+      <field name="name">Student Pivot View</field>
+      <field name="model">university.student</field>
+      <field name="arch" type="xml">
+        <pivot string="University Student" display_quantity="1" sample="1">
+          <field name="f_name" type="row"/>
+          <field name="l_name" type="col"/>
+<!--          <field name="email" type="measure" function="count"/>-->
+        </pivot>
+      </field>
+    </record>
+
+    <menuitem name="University" id="university.menu_root"/>
+
+    <!-- menu categories -->
+
+    <menuitem name="Students" id="university.student_cat" parent="university.menu_root"/>
+    <!-- <menuitem name="Menu 2" id="university.menu_2" parent="university.menu_root"/>
+-->
+    <!-- actions -->
+
+    <menuitem name="List of students"
+              id="university_student_list"
+              parent="university.student_cat"
+              action="student_action_window"/>
+<!--    <menuitem name="Server to list" id="university" parent="university.menu_2"
+              action="university.action_server"/>
+-->
+  </data>
+</odoo>

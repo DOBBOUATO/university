@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.university.classroom, access_university_classroom,university.model_university_classroom,university.group_instructor_restriction,1,1,1,1
+access.university.department, access_university_department,university.model_university_department,university.group_instructor_restriction,1,1,1,1
+access.university.instructor, access_university_instructor,university.model_university_instructor,university.group_instructor_restriction,1,1,1,1
+access.university.student, access_university_student,university.model_university_student,university.group_instructor_restriction,1,1,1,1
+access.university.subject, access_university_subject,university.model_university_subject,university.group_instructor_restriction,1,1,1,1
+
+access.university.classroom, access_university_classroom,university.model_university_classroom,university.group_student_restriction,1,0,0,0
+access.university.department, access_university_department,university.model_university_department,university.group_student_restriction,1,0,0,0
+access.university.instructor, access_university_instructor,university.model_university_instructor,university.group_student_restriction,1,0,0,0
+access.university.student, access_university_student,university.model_university_student,university.group_student_restriction,1,1,1,1
+access.university.subject, access_university_subject,university.model_university_subject,university.group_student_restriction,1,0,0,0
+
+
+

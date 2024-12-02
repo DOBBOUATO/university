@@ -1,0 +1,68 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+
+    <record model="ir.ui.view" id="instructor_list_view">
+      <field name="name">Instructor list</field>
+      <field name="model">university.instructor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="f_name"/>
+          <field name="l_name"/>
+          <field name="sex"/>
+          <field name="identity_card"/>
+          <field name="birthday"/>
+          <field name="recruitment_date"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- explicit from view definition -->
+
+    <record model="ir.ui.view" id="instructor_form_view">
+      <field name="name">instructor From</field>
+      <field name="model">university.instructor</field>
+      <field name="arch" type="xml">
+        <form>
+          <group>
+            <field name="f_name"/>
+            <field name="l_name"/>
+            <field name="sex"/>
+            <field name="identity_card"/>
+            <field name="birthday"/>
+            <field name="recruitment_date"/>
+            <field name="address"/>
+            <field name="email"/>
+            <field name="phone"/>
+            <field name="department_id"/>
+            <field name="subject_id"/>
+          </group>
+          <notebook>
+            <page name="list of classrooms">
+              <field name="classroom_ids"/>
+            </page>
+          </notebook>
+        </form>
+      </field>
+    </record>
+    <!-- actions opening views on models -->
+
+    <record model="ir.actions.act_window" id="instructor_action_window">
+      <field name="name">instructor window</field>
+      <field name="res_model">university.instructor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    <!-- menu categories -->
+
+    <menuitem name="Instructors" id="university_instructor_cat" parent="university.menu_root"/>
+    <!--<menuitem name="Menu 2" id="university.menu_2" parent="university.menu_root"/>-->
+
+    <!-- actions -->
+
+    <menuitem name="List of instructor" id="university_instructor_list" parent="university_instructor_cat"
+              action="instructor_action_window"/>
+    <!--<menuitem name="Server to list" id="university" parent="university.menu_2"-->
+              <!--action="university.action_server"/>-->
+
+  </data>
+</odoo>

@@ -1,0 +1,15 @@
+<!-- purchase_order_view_calendar.xml -->
+<odoo>
+    <data>
+        <record id="menu_university_root" model="ir.ui.menu">
+            <field name="name">University</field>
+            <field name="action" ref="action_university_main"/>
+            <field name="sequence" type="int">10</field>
+        </record>
+        <record id="action_university_main" model="ir.actions.act_window">
+            <field name="name">University</field>
+            <field name="res_model">university.student</field>  <!-- Main model of your app -->
+            <field name="view_mode">tree,form</field>  <!-- Display mode of the view -->
+        </record>
+    </data>
+</odoo>
